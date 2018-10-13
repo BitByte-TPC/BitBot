@@ -1,0 +1,11 @@
+{
+  "name": "levelUp-Bot",
+  "version": "0.0.1",
+  "description": "My First Bot",
+  "main": "bot.js",
+  "author": "get-thepacket",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.1.0"
+  }
+}
