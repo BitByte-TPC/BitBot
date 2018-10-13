@@ -2,10 +2,17 @@
   "name": "levelUp-Bot",
   "version": "0.0.1",
   "description": "My First Bot",
-  "main": "bot.js",
+  "main": "index.js",
   "author": "get-thepacket",
   "dependencies": {
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "discord.js": "^11.4.2",
     "winston": "^3.1.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
 }
