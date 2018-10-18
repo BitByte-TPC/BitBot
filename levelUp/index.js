@@ -5,7 +5,6 @@ const Discord = require("discord.js");
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
 // this is what we're refering to. Your client.
 const client = new Discord.Client();
-
 // Here we load the config.json file that contains our token and our prefix values.
 const config = require("./auth.json");
 // config.token contains the bot's token
@@ -33,6 +32,8 @@ client.on("guildDelete", guild => {
 
 
 client.on("message", async message => {
+  //This will check if command is starting with prefix
+  //if (!message.content.startsWith(config.prefix)) return;
   // This event will run on every single message received, from any channel or DM.
 
   // It's good practice to ignore other bots. This also makes your bot ignore itself
