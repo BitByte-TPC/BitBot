@@ -137,26 +137,23 @@ client.on("message", async message => {
   if (command === "name") {
       const [fname,lname] = args;
       message.delete();
-      message.channel.send("First Name of the guy is :"+fname+"\nand Last Name : "+lname);
+      message.channel.send("First Name of the guy is : "+fname+"\nand Last Name : "+lname);
 
   }
-  if(command==="quoteuser"){
+
+  if(command === "quoteuser"){
     let member = message.mentions.members.first();
     const remark = args.splice(1,1);
     const quote = args.splice(1);
     message.delete();
     message.channel.send("Member "+member+" is remarked "+remark+" and quoted "+quote.join(" "));
   }
-  if(commend === "help"){
-    message.channel.send("help\nGet help from Server\n\n
-      1. ping\nShow ping from Server\n\n
-      2. say\nMake bot say anything you want\n\n
-      3. kick\nKick a member\n\n
-      4. ban\nBan a member\n\n
-      5. purge\nDelete Messages\n\n
-      6. name\nGive out fName and lName\n\n
-      7. quoteuser\nMember + remark + quote\n\n");
+
+  if(command === "help"){
+    message.channel.send("help\nGet help from Server\n\n1. ping\nShow ping from Server\n\n2. say\nMake bot say anything you want\n\n3. kick\nKick a member\n\n4. ban\nBan a member\n\n5. purge\nDelete Messages\n\n6. name\nGive out fName and lName\n\n7. quoteuser\nMember + remark + quote\n\n");
   }
+
+  
 
 });
 
