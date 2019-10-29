@@ -18,5 +18,8 @@
   "homepage": "https://github.com/get-thepacket/Js-Test#readme",
   "dependencies": {
     "discord.js": "^11.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0"
   }
 }

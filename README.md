@@ -1,13 +1,12 @@
 # Js-Test
 
-Initial Commit
-==============
-readme.md
+---
+# New Project Start
+_ToDo_ :-
+[] codechef rating and star to be shown
+[] codeforces api can be used or scrap for the same as codechef
+[] play songs for a user
+[] add some todos
 
-##commits upto Now
-
-Initial commits consists of readme, and dependencies of discord and discord.js their are two driver scripts :
-  * index.js
-  * bot.js
 ---
 _both bot files are working and can be started with node fileName.js_
