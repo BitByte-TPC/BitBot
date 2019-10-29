@@ -1,0 +1,22 @@
+{
+  "name": "dsbot",
+  "version": "0.0.1",
+  "description": "A lazy bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/get-thepacket/Js-Test.git"
+  },
+  "author": "get-thepacket",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/get-thepacket/Js-Test/issues"
+  },
+  "homepage": "https://github.com/get-thepacket/Js-Test#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
+}
