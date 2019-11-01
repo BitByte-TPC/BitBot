@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/get-thepacket/Js-Test#readme",
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "enmap": "^5.2.1",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "eslint": "^6.6.0"

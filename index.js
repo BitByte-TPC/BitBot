@@ -1,32 +1,31 @@
 const discord = require('discord.js');
 const client  = new discord.Client();
 const config = require('./config.json');
+const Enmap = require('enmap');
+const fs = require('fs');
 
-client.on("ready",()=>{
-    console.log('Me ready..');
+client.config = config;
+
+fs.readdir('./events/',(err,files)=>{
+    if(err) return console.error(err);
+    files.forEach(file =>{
+        const event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        client.on(eventName,event.bind(null, client));
+    });
 });
 
-client.on("message",(message)=>{
-    if (message.author.bot) return;
-    // This is where we'll put our code.
-    if (message.content.indexOf(config.prefix) !== 0) return;
+client.commands = new Enmap();
 
-    var msg = message.content;
-    const ch = message.channel;
-    const args = msg.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-    if (!msg.startsWith(config.prefix) || message.author.bot) return;
-     if(command === "ping")
-        ch.send("Pong!!");
-    if(command=="kick"){
-        let mem = message.mentions.members.first();
-        mem.kick();
-    }
-    if(command == "say"){
-        let txt = args.join(" ");
-        message.delete();
-        ch.send(txt);
-    }
+fs.readdir('./commands/',(err,files)=>{
+    if(err) return console.error(err);
+    files.forEach(file=>{
+        if(!file.endsWith('.js')) return;
+        let props = require(`./commands/${file}`);
+        let commandName = file.split(".")[0];
+        console.log(`attempting to load command ${commandName}`);
+        client.commands.set(commandName,props);
+    });
 });
 
 client.login(config.token);
