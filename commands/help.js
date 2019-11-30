@@ -1,19 +1,17 @@
-exports.run = (client,message,args) => {
-    message.channel.send({embed : {
-        author : {
-            name : client.user.username,
-            icon_url : client.user.avatarURL
-        },
-        title : "This is your help",
-        url : "https://www.github.com/get-thepacket/Js-Test",
-        description : "Commands for the called upon bot of the server",
-        fields : [{
-            name :"ping",
-            value :"Pong it man!"
-        },{
-            name : "help",
-            value :" Shows the help page of the bot"
-        }]
+const Discord = require('discord.js');
+const fs = require('fs');
 
-    }}).catch(err => console.log(err));
+exports.run = (client,message,args) => {
+    var embed = new Discord.RichEmbed();
+    embed.setTitle('All of the commands');
+    embed.setDescription('Use commands with prefix "'+client.config.prefix+'". Thank you!');
+    embed.setColor([255,255,255]);
+
+    for(const [cmd,file] of client.commands.entries()){
+        if(file.info)
+            embed.addField(cmd,file.info);
+    }
+    message.channel.send(embed);
 }
+
+exports.info = "Print the help list";
