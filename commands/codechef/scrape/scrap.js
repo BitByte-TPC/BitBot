@@ -23,9 +23,8 @@ exports.getData = (username,callback) =>{
         else if(user.stars==5)user.color = "#FFD819";
         else if(user.stars==6)user.color = "#FF7F00";
         else if(user.stars==7)user.color = "#C7011A";
-        
-
-
+        user.highRating = cheerio.text($('div.rating-header small')).replace(/\D/g,'');
+        //console.log(user);
         callback(user);
 
     }).catch(console.error);

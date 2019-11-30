@@ -25,9 +25,7 @@ exports.run = (client,message,args)=>{
         message.channel.send("Can't find this command");
         return;
     }
-
     cmd.run(client,message,args);
-
 }
 
 exports.info = "Commands related to codechef, please respect.";

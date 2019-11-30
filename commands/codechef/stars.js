@@ -2,7 +2,7 @@ const web = require('./scrape/scrap.js');
 const Discord = require('discord.js');
 
 exports.run = (client,message,args) => {
-    web.getData(args,user =>{
+    web.getData(args,(user) =>{
         if(!user)
             message.channel.send("User not found");
         let embed = new Discord.RichEmbed();
@@ -10,8 +10,11 @@ exports.run = (client,message,args) => {
             .setDescription(`${user.name} - ${user.username}`)
             .addField("Stars",user.stars)
             .addField("Rating",user.rating)
-            .setThumbnail(user.iconURL)
+            .addField("Highest Rating",user.highRating)
             .setColor(user.color);
+            if(!user.iconURL.startsWith("/"))
+                embed.setThumbnail(user.iconURL);
+            else embed.setThumbnail("https://www.codechef.com/"+user.iconURL);
         message.channel.send(embed);
     })
 }
