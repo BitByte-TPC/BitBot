@@ -10,6 +10,7 @@ _ToDo_ :-
 - [X] Scrap working independent but not with bot (solved, link problem)
 - [X] Roles add and remove added (ezpz!)
 - [X] Set roles for codechef coders (if guild has it, Competitive Coder will be assigned)
+- [ ] add tech memes for fun (luckmeme)
 - [ ] add some todos (plz!)
 
 ---
