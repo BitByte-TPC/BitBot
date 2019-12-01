@@ -1,10 +1,11 @@
 {
   "name": "dsbot",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "A lazy bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,10 @@
   "homepage": "https://github.com/get-thepacket/Js-Test#readme",
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
-    "better-sqlite3": "^5.4.3",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
     "enmap": "^5.2.1",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "request": "^2.88.0",
     "request-promise": "^4.2.5"
