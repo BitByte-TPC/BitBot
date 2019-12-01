@@ -11,6 +11,7 @@ _ToDo_ :-
 - [X] Roles add and remove added (ezpz!)
 - [X] Set roles for codechef coders (if guild has it, Competitive Coder will be assigned)
 - [X] xkcd image fetch added (as dailymeme) 
+- [ ] keep the repo syntactically correct.
 - [ ] add some todos (plz!)
 
 ---
