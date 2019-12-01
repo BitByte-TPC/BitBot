@@ -23,7 +23,3 @@ _ToDo_ :-
 - Can give info about codechef user by supplying username
 
 ---
-- [ ] add tech memes for fun (luckmeme)
-- [ ] add some todos (plz!)
-
----
