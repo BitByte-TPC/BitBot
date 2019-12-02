@@ -12,7 +12,7 @@ _ToDo_ :-
 - [X] Set roles for codechef coders (if guild has it, Competitive Coder will be assigned)
 - [X] xkcd image fetch added (as dailymeme) 
 - [ ] keep the repo syntactically correct.
-- [ ] add a command to send codes only by providing submission links (codechef)
+- [X] add a command to send codes only by providing submission links (codechef) => (done by pasting code only)
 - [ ] same as above for codeforces
 - [ ] add some todos (plz!)
 

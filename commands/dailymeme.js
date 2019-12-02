@@ -2,6 +2,7 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 
 exports.run = (client,message,args) =>{
+    //total number of available memes = 2236
     let rand = (Math.round(Math.random()*10000))%2236;
     if(rand==0){
         message.channel.send("Unlucky day, Sorry!");

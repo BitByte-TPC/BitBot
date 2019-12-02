@@ -1,4 +1,5 @@
 module.exports = (client,message)=>{
+    //command accessing magic
     if(message.author.bot) return;
 
     if(message.content.indexOf(client.config.prefix)!==0) return;

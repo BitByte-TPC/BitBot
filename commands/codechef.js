@@ -1,4 +1,5 @@
-const Discord = require('discord.js');
+//Driver file for codechef command
+
 const fs = require('fs');
 const enmap = require('enmap');
 
