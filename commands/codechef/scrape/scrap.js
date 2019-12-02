@@ -28,5 +28,20 @@ exports.getData = (username,callback) =>{
         callback(user);
 
     }).catch(console.error);
+}
+exports.getSub = (num,callback)=>{
+    let op1 = {
+        uri : `https://www.codechef.com/viewplaintext/${num}`,
+        headers : {
+            'User-Agent' : 'Mozilla/5.0'
+        }   
+    };
+    let text ;
+    rp(op1).then(function(html){
+        const $ = cheerio.load(html);
+        //console.log($);
+        text=cheerio.text($('body pre'));
+        callback(text);
+    }).catch(console.error);
 
 }
