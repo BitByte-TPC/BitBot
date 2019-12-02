@@ -51,6 +51,7 @@ exports.getSub = (num,callback)=>{
 //get user data from solution, in work todo - is added
 exports.getUser = (num,callback) => {
     let options = {
+        method : 'GET',
         uri : `https://www.codechef.com/viewsolution/${num}`,
         headers : {
             'Host':'www.codechef.com',
@@ -62,9 +63,16 @@ exports.getUser = (num,callback) => {
     rp(options).then(html => {
         const $ = cheerio.load(html);
         let user = {};
-        user.contest = "https:"+$('span.contest-code strong a').attr('href');
-        user.problem = "https:"+$('span.problem-code strong a').attr('href');
-        user.profile = "https:"+$('span.user-name strong a').attr('href');
+        let ref = [];
+        $('div.breadcrumb > a').each((i,e)=>{
+            ref.push($(e).attr('href'));
+        })
+        let ar = $('div.breadcrumb').text();
+	    let profile_name = ar.substr(39).split(" ")[0];
+        user.profile = "https://www.codechef.com/users/"+profile_name;       
+        user.contest = "https://www.codechef.com/"+ref[1];
+        user.problem = "https://www.codechef.com/"+ref[2];
+        // user.profile = "https:"+$('span.user-name strong a').attr('href');
         callback(user);
     })
 }

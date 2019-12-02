@@ -3,7 +3,8 @@
 
 # Project Working and in testing
 _ToDo_ :-
-- [X] codechef rating and star to be shown (added with embed support)
+- [ ] keep the repo syntactically correct.
+- [X] codechef rating and star to be shown (added with embed)
 - [ ] Make a codeforces command
 - [ ] play songs for a user
 - [X] Bugs detected for scrap and is needed to be solved
@@ -11,8 +12,7 @@ _ToDo_ :-
 - [X] Roles add and remove added (ezpz!)
 - [X] Set roles for codechef coders (if guild has it, Competitive Coder will be assigned)
 - [X] xkcd image fetch added (as dailymeme) 
-- [ ] keep the repo syntactically correct.
-- [X] add a command to send codes only by providing submission links (codechef) => (done by pasting code only)
+- [X] add a command to send codes only by providing submission links (codechef) => (done by providing solution code only)
 - [ ] same as above for codeforces
 - [ ] add some todos (plz!)
 
@@ -24,5 +24,6 @@ _ToDo_ :-
 - Can remove/add roles from member
 - Can fetch xkcd memes
 - Can give info about codechef user by supplying username
+- Can fetch solution code by supplying solution code.
 
 ---
