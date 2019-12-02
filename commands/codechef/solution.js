@@ -26,3 +26,5 @@ exports.run = (client,message,args) => {
     });
     
 }
+
+exports.info = "Print solution as a text message\n!codechef solution 'solution-id'";

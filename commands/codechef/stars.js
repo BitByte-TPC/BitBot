@@ -20,3 +20,5 @@ exports.run = (client,message,args) => {
         message.channel.send(embed);
     })
 }
+
+exports.info = "Print user info of codechef user.\n!codechef stars 'user-id'";
