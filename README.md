@@ -14,7 +14,7 @@ _ToDo_ :-
 - [X] xkcd image fetch added (as dailymeme) 
 - [X] add a command to send codes only by providing submission links (codechef) => (done by providing solution code only)
 - [ ] same as above for codeforces
-- [ ] add colouring to code
+- [ ] add colouring to code (identify the language of the code)
 - [ ] add some todos (plz!)
 
 ---
