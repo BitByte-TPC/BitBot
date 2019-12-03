@@ -11,7 +11,7 @@ exports.run = (client,message,args) => {
         }
         let embed = new Discord.RichEmbed();
         embed.addField("Problem link",user.problem)
-            .addField("Contest link",user.contest)
+            //.addField("Contest link",user.contest)
             .addField("Profile link",user.profile);
         message.channel.send(embed);
     });

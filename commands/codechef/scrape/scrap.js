@@ -70,8 +70,9 @@ exports.getUser = (num,callback) => {
         let ar = $('div.breadcrumb').text();
 	    let profile_name = ar.substr(39).split(" ")[0];
         user.profile = "https://www.codechef.com/users/"+profile_name;       
-        user.contest = "https://www.codechef.com/"+ref[1];
-        user.problem = "https://www.codechef.com/"+ref[2];
+        //user.contest = "https://www.codechef.com/"+ref[1];
+        user.problem = "https://www.codechef.com/"+ref[1];
+        //console.log(ref);
         // user.profile = "https:"+$('span.user-name strong a').attr('href');
         callback(user);
     })
