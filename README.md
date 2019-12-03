@@ -5,7 +5,7 @@
 _ToDo_ :-
 - [ ] keep the repo syntactically correct.
 - [X] codechef rating and star to be shown (added with embed)
-- [ ] Make a codeforces command
+- [ ] Make a codeforces command (done, profile scraping will be done tomorrow)
 - [ ] play songs for a user
 - [X] Bugs detected for scrap and is needed to be solved
 - [X] Scrap working independent but not with bot (solved, link problem)
@@ -13,7 +13,7 @@ _ToDo_ :-
 - [X] Set roles for codechef coders (if guild has it, Competitive Coder will be assigned)
 - [X] xkcd image fetch added (as dailymeme) 
 - [X] add a command to send codes only by providing submission links (codechef) => (done by providing solution code only)
-- [ ] same as above for codeforces
+- [X] same as above for codeforces
 - [ ] add colouring to code (identify the language of the code)
 - [ ] add some todos (plz!)
 
@@ -26,5 +26,6 @@ _ToDo_ :-
 - Can fetch xkcd memes
 - Can give info about codechef user by supplying username
 - Can fetch solution code by supplying solution code.
+- For codeforces supplying contest number and solution id will be required
 
 ---

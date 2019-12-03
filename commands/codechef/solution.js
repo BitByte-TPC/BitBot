@@ -1,5 +1,5 @@
 const web = require('./scrape/scrap.js');
-const Discord = require('discord.js');
+// const Discord = require('discord.js');
 // const hljs = require('highlight.js');
 
 exports.run = (client,message,args) => {
