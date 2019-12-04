@@ -7,16 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
+  "engines": {"node" : "10.15.2"},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/get-thepacket/Js-Test.git"
+    "url": "git+https://github.com/get-thepacket/discord-bot.git"
   },
   "author": "get-thepacket",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/get-thepacket/Js-Test/issues"
+    "url": "https://github.com/get-thepacket/discord-bot/issues"
   },
-  "homepage": "https://github.com/get-thepacket/Js-Test#readme",
+  "homepage": "https://github.com/get-thepacket/discord-bot#readme",
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
     "cheerio": "^1.0.0-rc.3",
