@@ -5,7 +5,8 @@
 _ToDo_ :-
 - [ ] keep the repo syntactically correct.
 - [X] codechef rating and star to be shown (added with embed)
-- [ ] Make a codeforces command (done, profile scraping will be done tomorrow)
+- [X] Make a codeforces command (done)
+- [ ] Add color to the codeforces user
 - [ ] play songs for a user
 - [X] Bugs detected for scrap and is needed to be solved
 - [X] Scrap working independent but not with bot (solved, link problem)
@@ -27,5 +28,6 @@ _ToDo_ :-
 - Can give info about codechef user by supplying username
 - Can fetch solution code by supplying solution code.
 - For codeforces supplying contest number and solution id will be required
+- Can give user details for codeforces
 
 ---

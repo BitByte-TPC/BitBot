@@ -9,7 +9,8 @@ exports.getData = (username,callback) =>{
         headers :{
             'User-Agent' : 'Mozilla/5.0'
         }
-    }
+    };
+    
     //rp take options and return the html from the url
     rp(options).then(html => {
         const $  = cheerio.load(html); //loads html to $ so that we can access it using jQuery (approximately true!)
@@ -31,7 +32,8 @@ exports.getData = (username,callback) =>{
         callback(user); //callback to user same as async await just old
 
     }).catch(console.error);
-}
+};
+
 //get Solution using solution id
 exports.getSub = (num,callback)=>{
     let options = {
@@ -47,8 +49,9 @@ exports.getSub = (num,callback)=>{
         text=cheerio.text($('body pre'));
         callback(text);
     }).catch(console.error);
-}
-//get user data from solution, in work todo - is added
+};
+
+//get user data from solution, in work todo - is added work on halt, raise a pr if you needed
 exports.getUser = (num,callback) => {
     let options = {
         method : 'GET',
@@ -66,14 +69,12 @@ exports.getUser = (num,callback) => {
         let ref = [];
         $('div.breadcrumb > a').each((i,e)=>{
             ref.push($(e).attr('href'));
-        })
+        });
+
         let ar = $('div.breadcrumb').text();
 	    let profile_name = ar.substr(39).split(" ")[0];
-        user.profile = "https://www.codechef.com/users/"+profile_name;       
-        //user.contest = "https://www.codechef.com/"+ref[1];
+        user.profile = "https://www.codechef.com/users/"+profile_name;
         user.problem = "https://www.codechef.com/"+ref[1];
-        //console.log(ref);
-        // user.profile = "https:"+$('span.user-name strong a').attr('href');
         callback(user);
-    })
-}
+    });
+};
