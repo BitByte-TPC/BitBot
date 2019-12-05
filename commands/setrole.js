@@ -5,7 +5,10 @@ exports.run = (client,message,args) => {
     // console.log(role);
     // console.log(args.join(" "));
     if(!role) message.channel.send("Role not found in the Guild");
-    member.addRole(role).catch(console.error);
+    if(message.member.hasPermission("MANAGE_ROLES"))
+        member.addRole(role).catch(console.error);
+    else 
+        message.channel.send("Sender doesn't have permission");
 }
 
-exports.info = "Set roles to a member of Server\n !setrole @user role";
+exports.info = "Set roles to a member of Server\n !setrole @user role\nmMessage author must have permission.";

@@ -51,6 +51,7 @@ exports.getData = (args, callback) => {
         user.profile_rank = $("div[class=user-rank] span").text(); //Profile rank
         let l = [];
         $("div[class=info] ul li span").each((i,e) => l.push($(e).text()));
+        
         // l[0] - rating, l[2] - rank, l[3] - highest rating
         user.high_rank = l[2].replace(',','');
         user.rating = l[0];

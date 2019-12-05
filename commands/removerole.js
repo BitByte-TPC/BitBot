@@ -3,10 +3,13 @@ exports.run = (client,message,args) => {
     let roleN = args.shift();
     let role = message.guild.roles.find(r => r.name === args.join(" "));
     
-    if(message.member.roles.some(r=> r.name === args.join(" ")))
-        member.removeRole(role).catch(console.error);
-    else
-        message.channel.send("Member doesn't have this role");
+    if(message.member.hasPermission("MANAGE_ROLES"))
+        if(message.member.roles.some(r=> r.name === args.join(" ")))
+            member.removeRole(role).catch(console.error);
+    else {
+        message.channel.send("Sender doesn't have permission or member does not have the role.");
+        return;
+    }
 }
 
-exports.info = "Remove role of a member of Server\n!removerole @user role";
+exports.info = "Remove role of a member of Server\n!removerole @user {role}";

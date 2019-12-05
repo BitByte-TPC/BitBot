@@ -11,3 +11,5 @@ exports.run = (client,message,args) => {
         message.channel.send(embed);
     });
 };
+
+exports.info = "Gives details about user.\n!codeforces user {user-name}";
