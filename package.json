@@ -27,6 +27,8 @@
     "enmap": "^5.2.1",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "lowdb": "^1.0.0",
+    "mysql": "^2.17.1",
     "phantom": "^6.3.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5"
