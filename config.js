@@ -1,5 +1,5 @@
 exports.config = {
-    "token":"NTAwNTgyMDU4NDUyNTgyNDAy.XedzSg.NkcG-I4IKl37MRWYWBd-1rhhlW0",
-    "prefix":"!",
+    "token":"NTAwNTgyMDU4NDUyNTgyNDAy.Xe42qw.H_74jEfsftWne6dQxz3ZqDMKN9o",
+    "prefix":"-",
     "ownerID" : "get-thepacket"
 }

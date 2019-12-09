@@ -19,10 +19,6 @@ exports.run = async function(client,message,args){
         "Time Limit Exceeded" : "df0101",
         "Runtime Error":"df0101"
     }
-    //calls getSub function to get solution as plaintext and format it here
-        // let embed = new Discord.RichEmbed();
-        // text = hljs.highlightAuto(text).value;
-        //text = "```"+text+"```"; //add backticks for formatting
     let text = profile.plaintext;
     text = text.match(/(.|[\r\n]){1,1990}/g); //found on stackoverflow split string in list with element size 1990
     let embed = new Discord.RichEmbed();
