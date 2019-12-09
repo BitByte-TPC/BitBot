@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "engines": {"node" : "10.15.2"},
+  "engines": {
+    "node": "10.15.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/get-thepacket/discord-bot.git"
@@ -25,6 +27,7 @@
     "enmap": "^5.2.1",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "phantom": "^6.3.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5"
   },

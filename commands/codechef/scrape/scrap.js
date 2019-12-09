@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const rp = require('request-promise');
+var phantom = require('phantom');
 
 //getting user data from codechef scraping magic
 exports.getData = (username,callback) =>{
@@ -35,46 +36,72 @@ exports.getData = (username,callback) =>{
 };
 
 //get Solution using solution id
-exports.getSub = (num,callback)=>{
-    let options = {
-        uri : `https://www.codechef.com/viewplaintext/${num}`,
-        headers : {
-            'User-Agent' : 'Mozilla/5.0'
-        }   
-    };
-    let text;
+// exports.getSub = (num,callback)=>{
+//     let options = {
+//         uri : `https://www.codechef.com/viewplaintext/${num}`,
+//         headers : {
+//             'User-Agent' : 'Mozilla/5.0'
+//         }   
+//     };
+//     let text;
 
-    rp(options).then(function(html){
-        const $ = cheerio.load(html);
-        text=cheerio.text($('body pre'));
-        callback(text);
-    }).catch(console.error);
-};
+//     rp(options).then(function(html){
+//         const $ = cheerio.load(html);
+//         text=cheerio.text($('body pre'));
+//         callback(text);
+//     }).catch(console.error);
+// };
 
 //get user data from solution, in work todo - is added work on halt, raise a pr if you needed
-exports.getUser = (num,callback) => {
-    let options = {
-        method : 'GET',
-        uri : `https://www.codechef.com/viewsolution/${num}`,
-        headers : {
-            'Host':'www.codechef.com',
-            'User-Agent' : 'Mozilla/5.0',
-            'Accept' : 'text/html,application/xhtml+xml,application/xml'
-        }
-    }
+// exports.getUser = (num,callback) => {
+//     let options = {
+//         method : 'GET',
+//         uri : `https://www.codechef.com/viewsolution/${num}`,
+//         headers : {
+//             'Host':'www.codechef.com',
+//             'User-Agent' : 'Mozilla/5.0',
+//             'Accept' : 'text/html,application/xhtml+xml,application/xml'
+//         }
+//     }
 
-    rp(options).then(html => {
-        const $ = cheerio.load(html);
-        let user = {};
-        let ref = [];
-        $('div.breadcrumb > a').each((i,e)=>{
-            ref.push($(e).attr('href'));
-        });
+//     rp(options).then(html => {
+//         const $ = cheerio.load(html);
+//         let user = {};
+//         let ref = [];
+//         $('div.breadcrumb > a').each((i,e)=>{
+//             ref.push($(e).attr('href'));
+//         });
 
-        let ar = $('div.breadcrumb').text();
-	    let profile_name = ar.substr(39).split(" ")[0];
-        user.profile = "https://www.codechef.com/users/"+profile_name;
-        user.problem = "https://www.codechef.com/"+ref[1];
-        callback(user);
+//         let ar = $('div.breadcrumb').text();
+// 	    let profile_name = ar.substr(39).split(" ")[0];
+//         user.profile = "https://www.codechef.com/users/"+profile_name;
+//         user.problem = "https://www.codechef.com/"+ref[1];
+//         callback(user);
+//     });
+// };
+
+exports.getSub = async function(id) {
+    const instance = await phantom.create();
+    const page = await instance.createPage();
+
+    await page.on("onRequestingResource", data => {
+        console.info('Requesting',data.url);
     });
-};
+    const status = await page.open(`https://www.codechef.com/viewsolution/${id}`)
+    console.log(status);
+
+    const content = await page.property('content');
+    const $ = cheerio.load(content, {
+        normalizeWhitespace : false,
+        xmlMode : false,
+        decodeEntities : true
+    });
+
+    let l = $('div.ns-content script').html();
+    let n = l.substr(21);
+    const obj = JSON.parse(n.substr(0,n.length -2));
+
+    await instance.exit();
+
+    return obj;
+}

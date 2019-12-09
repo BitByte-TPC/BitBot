@@ -1,35 +1,41 @@
 const web = require('./scrape/scrap.js');
-// const Discord = require('discord.js');
+const Discord = require('discord.js');
 // const hljs = require('highlight.js');
 
-exports.run = (client,message,args) => {
+exports.run = async function(client,message,args){
     // //in testing
     // //gives out the info of the solution - it's link, profile link and contest link
-    // web.getUser(args, user => {
-    //     if(!user){
-    //         message.channel.send("User doesn't exists");
-    //         return;
-    //     }
-    //     let embed = new Discord.RichEmbed();
-    //     embed.addField("Problem link",user.problem)
-    //         //.addField("Contest link",user.contest)
-    //         .addField("Profile link",user.profile);
-    //     message.channel.send(embed);
-    // });
+    const p = await web.getSub(args);
+    const profile = p.data;
+    console.log(profile);
+    if(profile.testInfo == ''){
+        message.channel.send("Solution not found!");
+        return;
+    }
+    let colors = {
+        "Compilation Error" : "ffcf2a",
+        "Accepted" : "12c200",
+        "Rejected" : "df0101",
+        "Time Limit Exceeded" : "df0101",
+        "Runtime Error":"df0101"
+    }
     //calls getSub function to get solution as plaintext and format it here
-    web.getSub(args,text => {
-        if(!text){
-            message.channel.send("Solution not available");
-            return;
-        }    
         // let embed = new Discord.RichEmbed();
         // text = hljs.highlightAuto(text).value;
         //text = "```"+text+"```"; //add backticks for formatting
-        text = text.match(/(.|[\r\n]){1,1990}/g); //found on stackoverflow split string in list with element size 1990
-        message.channel.send(`${message.author.username}'s Solution :`);
-        text.forEach(e => {
-            message.channel.send("```"+e+"```");
-        });
+    let text = profile.plaintext;
+    text = text.match(/(.|[\r\n]){1,1990}/g); //found on stackoverflow split string in list with element size 1990
+    let embed = new Discord.RichEmbed();
+    const home = "https://www.codechef.com";
+    embed.addField("Problem Link",home+profile.problemUrl)
+        .addField("Contest Link",home+profile.contestUrl)
+        .addField("Profile Link of Submitter",home+"/users/"+profile.solutionOwnerHandle)
+        .setColor(colors[profile.humanReadableResult]);
+    
+    message.channel.send(embed);
+
+    text.forEach(e => {
+        message.channel.send("```"+e+"```");
     });
     
 }
