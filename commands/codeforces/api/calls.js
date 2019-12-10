@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const rp = require('request-promise');
+const _ = require('lodash');
 
 exports.getSub = (num,callback) => {
     //console.log(num);
@@ -32,34 +33,77 @@ exports.getUser = (num,callback) => {
         user.profile = "https://codeforces.com"+l[0];
         user.problem = "https://codeforces.com"+l[1];
         callback(user);
-    })
+    });
 };
 
-exports.getData = (args, callback) => {
-    let url = `https://codeforces.com/profile/${args}`;
+exports.getDataOfUser = (args,callback) => {
+
+    let url = `https://codeforces.com/api/user.info?handles=${args.join(";")}`;
     let option = {
         uri : url,
         headers : {
-            'User-Agent' : 'Mozilla/5.0'
+            "Host" : "codeforces.com",
+            "User-Agent" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0"
         }
     };
 
-    rp(option).then(html => {
-        const $ = cheerio.load(html);
-        let user = {};
-        user.profile_name = $("h1 > a").text(); //Profile name
-        user.profile_rank = $("div[class=user-rank] span").text(); //Profile rank
-        let l = [];
-        $("div[class=info] ul li span").each((i,e) => l.push($(e).text()));
-        
-        // l[0] - rating, l[2] - rank, l[3] - highest rating
-        user.high_rank = l[2].replace(',','');
-        user.rating = l[0];
-        user.high_rating = l[3];
-        user.iconURL = "https:"+$("div[class=title-photo] div div div img").attr('src');
-        user.url = url;
-        user.name = args;
-        callback(user);
-
-    }).catch(console.error);
+    rp(option).then(data => {
+        let obj = JSON.parse(data);
+        if(obj.status != "OK")
+            return;
+        let main = obj.result;
+        let json_data = [];
+        main.forEach((element) => {
+            json_data.push({
+                handle : element.handle,
+                rating : element.rating,
+                maxRating : element.maxRating,
+                rank : element.rank,
+                maxRank : element.maxRank,
+                iconURL : "https:"+element.titlePhoto
+            });
+        });
+        callback(json_data);
+    });
 };
+
+exports.getRandomQuestion = (callback) => {
+    let url = `https://codeforces.com/api/problemset.problems?tags=implementation`;
+    let option = {
+        uri : url,
+        headers : {
+            "Host" : "codeforces.com",
+            "User-Agent" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0"
+        }
+    };
+
+    rp(option).then(data => {
+        let json = JSON.parse(data).result.problems;
+        json = json[Math.floor(Math.random() * json.length)];
+
+        callback(json);
+
+    })
+}
+
+exports.getStatus = (user,callback) => {
+    let url = `https://codeforces.com/api/user.status?handle=${user}&from=1&count=1`;
+    let option = {
+        uri : url,
+        headers : {
+            "Host" : "codeforces.com",
+            "User-Agent" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0"
+        }
+    };
+
+    rp(option).then(data => {
+        const json = JSON.parse(data).result[0];
+        let obj = {
+            cid : json.problem.contestId,
+            index : json.problem.index,
+            verdict : json.verdict,
+            time : json.creationTimeSeconds
+        };
+        callback(obj);
+    });
+}

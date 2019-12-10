@@ -27,6 +27,7 @@
     "enmap": "^5.2.1",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "lodash": "^4.17.15",
     "lowdb": "^1.0.0",
     "mysql": "^2.17.1",
     "phantom": "^6.3.0",
