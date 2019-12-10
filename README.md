@@ -16,7 +16,7 @@ _ToDo_ :-
 - [X] add a command to send codes only by providing submission links (codechef) => (done by providing solution code only)
 - [X] same as above for codeforces
 - [ ] add colouring to code (identify the language of the code)
-- [ ] add some todos (plz!)
+- [X] verify codechef and codeforces account
 
 ---
 
@@ -29,5 +29,6 @@ _ToDo_ :-
 - Can fetch solution code by supplying solution code.
 - For codeforces supplying contest number and solution id will be required
 - Can give user details for codeforces
+- Can verify cc and cf accounts they get added to database after verification (pr = usertag)
 
 ---
