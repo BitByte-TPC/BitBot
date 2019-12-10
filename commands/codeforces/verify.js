@@ -13,7 +13,7 @@ exports.run = (client,message,args) => {
     let link = `https://codeforces.com/contest/${json.contestId}/problem/${json.index}`;
     embed.addField("You have 1 minute, submit a comilation error to the question",link);
     message.channel.send(embed);
-    gdata.timeWhenQuestionIsPut = Date.now()*1000;
+    gdata.timeWhenQuestionIsPut = Date.now()/1000;
     });
 
     setTimeout(()=> {
