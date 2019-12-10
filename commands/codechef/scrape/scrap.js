@@ -95,18 +95,20 @@ exports.verify = async function(id) {
 		answer.push(e);
 	});
     //data about first answer
-	let data = $(answer[0]).text();
-    
-    let f = {};
-    f.date = data[2]; //date in dd/mm/yy
-	f.ap = data[1]; //ap/pm
-	f.time = data[0].split(":"); //time in hh:mm
+    let data = $(answer[0]).text();
+    // var p = data.match(/(\d{2}):(\d{2}) (\w{2}) (\d{2})\/(\d{2})\/(\d{2})/); //self-made pretty proud
+    // if(p[3]=='PM'){
+    //     p[1] = 12 + (+p[1]);
+    //     p[1] = ''+p[1];
+    // }
+    // let utcDate = Date.UTC('20'+p[6],p[5]-1,p[4],p[1],p[2])/1000;
 
+    let f={};
+    f.date = data.split('')[0];
 	f.pcode = $(answer[1]).text(); //problem code
-	f.qstatus = $("span",answer[2]).attr("title"); //should produce "compilation error"
+	f.status = $("span",answer[2]).attr("title"); //should produce "compilation error"
     // console.log(data,pcode,qstatus);
     await instance.exit();
-
     return f;
 };
 
