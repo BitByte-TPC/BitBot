@@ -1,24 +1,25 @@
-const web = require('./scrape/scrap.js');
+const codechef = require('./scrape/scrap.js');
 const Discord = require('discord.js');
 
-exports.run = (client,message,args) => {
-    web.getData(args,(user) =>{
-        if(!user)
-            message.channel.send("User not found");
-        let embed = new Discord.RichEmbed();
-        //User details in embed
-        embed.setTitle(`The following details are fetched`)
-            .setDescription(`${user.name} - ${user.username}`)
-            .addField("Stars",user.stars)
-            .addField("Rating",user.rating)
-            .addField("Highest Rating",user.highRating)
-            .setColor(user.color);
-            //Setting thumbnail with some magic
-            if(!user.iconURL.startsWith("/"))
-                embed.setThumbnail(user.iconURL);
-            else embed.setThumbnail("https://www.codechef.com/"+user.iconURL);
-        message.channel.send(embed);
-    })
+exports.run = async (client, message, args) => {
+    let user = await codechef.getUserInfo(args);
+
+    if (!user)
+        message.channel.send("User not found");
+
+    let embed = new Discord.RichEmbed();
+    embed.setTitle(`${user.name} - ${user.username}`)
+        .addField("Stars", user.stars, true)
+        .addField("Rating", user.rating, true)
+        .addField("Highest Rating", user.highRating, true)
+        .setColor(user.color);
+    
+        //if user doesnt have pfrofile pic use default
+    if (!user.iconURL.startsWith("/"))
+        embed.setThumbnail(user.iconURL);
+    else embed.setThumbnail("https://www.codechef.com/" + user.iconURL);
+    
+    message.channel.send(embed);
 }
 
-exports.info = "Print user info of codechef user.\n!codechef stars 'user-id'";
+exports.info = "Print user info of codechef user.\n`!cc user <user-id>`";
