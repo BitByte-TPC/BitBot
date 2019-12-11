@@ -8,7 +8,7 @@ exports.run = (client,message,args) => {
 
     for(const [cmd,file] of client.commands.entries()){
         if(file.info)
-            embed.addField(cmd,file.info);
+            embed.addField(`**${cmd}**`,file.info);
     }
     message.channel.send(embed);
 }

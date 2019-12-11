@@ -18,9 +18,7 @@ exports.run = (client,message,args) =>{
         const $ = cheerio.load(html);
         let link = $("#comic img").attr('src');
         link = "https:"+link;
-        message.channel.send("Your educational meme ===",{
-            files:[link]
-        });
+        message.channel.send(link);
     }).catch(err => console.error);
 }
 

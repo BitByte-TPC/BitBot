@@ -3,7 +3,7 @@ const allowedSelfRoles = ['Competitive Programmer','Developer','Gamer', 'Linux',
 exports.run = (client,message,args) => {
     let member = message.member;
     
-    let role = message.guild.roles.find(r => r.name.toLowerCase() === args.join(" "));
+    let role = message.guild.roles.find(r => r.name.toLowerCase() === args.join(" ").toLowerCase());
     
     if(!role){
         message.channel.send("Role is not found");

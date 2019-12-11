@@ -32,7 +32,7 @@ exports.run = async function (client, message, args) {
                 base.updateCCHandle(data.username, handle);
             }
 
-            message.channel.send(`You are now verified, ${message.member}!\nYour role will be added soon.`);
+            message.channel.send(`You are now verified for Codechef, ${message.member}!\nYour role will be added soon.`);
             setRole(message.member, handle);
         }
         else {
