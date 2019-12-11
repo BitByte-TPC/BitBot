@@ -17,7 +17,7 @@ _ToDo_ :-
 - [X] same as above for codeforces
 - [ ] add colouring to code (identify the language of the code)
 - [X] verify codechef and codeforces account
-
+- [ ] replace callbacks/then with `async/await` 
 ---
 
 # Features till now :-
