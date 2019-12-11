@@ -1,5 +1,5 @@
 exports.run = (client,message,args) =>{
-    message.channel.send("Pong bitches!").catch(console.error);
+    message.channel.send(new Date().getTime() - message.createdTimestamp + " ms").catch(console.error);
 }
 
-exports.info = "Ping the user";
+exports.info = "Get the ping";

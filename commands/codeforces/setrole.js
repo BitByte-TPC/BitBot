@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
                 if (!base.addUser(data))
                     base.updateCFHandle(data.username, handle);
                     
-                message.channel.send(`You are verifed now, ${message.member}!\nYour role will be added soon.`);
+                message.channel.send(`You are verifed now for Codeforces, ${message.member}!\nYour role will be added soon.`);
                 setRole(message.member, handle, message);
             }
             else {
