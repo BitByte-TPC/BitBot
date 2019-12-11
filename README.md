@@ -7,7 +7,7 @@ _ToDo_ :-
 - [X] codechef rating and star to be shown (added with embed)
 - [X] Make a codeforces command (done)
 - [ ] Add color to the codeforces user
-- [ ] play songs for a user
+- [ ] ~~play songs for a user~~(cant work with limited resources)
 - [X] Bugs detected for scrap and is needed to be solved
 - [X] Scrap working independent but not with bot (solved, link problem)
 - [X] Roles add and remove added (ezpz!)
@@ -19,14 +19,17 @@ _ToDo_ :-
 - [X] verify codechef and codeforces account
 - [ ] replace callbacks/then with `async/await` 
 - [ ] add profile link in `!cc user` and `!cf user`
-- [ ] modify setrole of both to send which site they are verifying for
+- [x] modify setrole of both to send which site they are verifying for
+- [ ] add `code` command that runs code of selected languges  
+- [ ] add `source` command that gives nice github link embed 
+- [ ] fix `solution` command for both cc and cf
 
 ---
 
 # Features till now :-
 - Can ping someone
 - Can produce a help page
-- Can remove/add roles from member
+- Can remove/add self roles from member
 - Can fetch xkcd memes
 - Can give info about codechef user by supplying username
 - Can fetch solution code by supplying solution code.
