@@ -18,6 +18,9 @@ _ToDo_ :-
 - [ ] add colouring to code (identify the language of the code)
 - [X] verify codechef and codeforces account
 - [ ] replace callbacks/then with `async/await` 
+- [ ] add profile link in `!cc user` and `!cf user`
+- [ ] modify setrole of both to send which site they are verifying for
+
 ---
 
 # Features till now :-
