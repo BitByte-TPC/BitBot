@@ -13,4 +13,3 @@ exports.run = (client,message,args) => {
 }
 
 //sets help parameter for help command 
-exports.info = "Set Competitive Programmer as a Role to a member of Codechef.\n!codechef setrole";

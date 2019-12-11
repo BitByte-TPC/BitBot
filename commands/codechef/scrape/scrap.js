@@ -31,14 +31,7 @@ exports.getData = (username,callback) =>{
             7 : "#C7011A"
         }
         user.color = colors[user.stars];
-        
-        // if(user.stars==1)user.color = "#666666";
-        // else if(user.stars==2)user.color = "#1E7D22";
-        // else if(user.stars==3)user.color = "#3366CB";
-        // else if(user.stars==4)user.color = "#684273";
-        // else if(user.stars==5)user.color = "#FFD819";
-        // else if(user.stars==6)user.color = "#FF7F00";
-        // else if(user.stars==7)user.color = "#C7011A";
+        user.stars = user.stars + "★";
         user.highRating = cheerio.text($('div.rating-header small')).replace(/\D/g,'');
         
         callback(user); //callback to user same as async await just old

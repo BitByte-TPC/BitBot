@@ -30,5 +30,6 @@ _ToDo_ :-
 - For codeforces supplying contest number and solution id will be required
 - Can give user details for codeforces
 - Can verify cc and cf accounts they get added to database after verification (pr = usertag)
+- Can give roles based on rank and stars in cf and cc respectively
 
 ---

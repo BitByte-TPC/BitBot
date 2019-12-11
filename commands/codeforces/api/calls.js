@@ -63,6 +63,7 @@ exports.getDataOfUser = (args,callback) => {
                 iconURL : "https:"+element.titlePhoto
             });
         });
+        // console.log(json_data);
         callback(json_data);
     });
 };
