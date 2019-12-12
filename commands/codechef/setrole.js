@@ -6,7 +6,7 @@ const base = require(path.join(__dirname, "../database/db_json.js"));
 exports.run = async function (client, message, args) {
     
     let handle = args[0];
-
+  
     if (base.getUserByCCHandle(handle)) {
         message.channel.send("Your rank will be updated");
         setRole(message.member, handle);
@@ -47,7 +47,7 @@ let setRole = async (member, id) => {
     let newRole = 'Codechef ' + user.stars;
 
     let roles = member.roles;
-    oldRole = roles.find(r => r.name.startsWith('Codechef'))
+    let oldRole = roles.find(r => r.name.startsWith('Codechef'))
 
     if (oldRole) {
         member.removeRole(oldRole);
