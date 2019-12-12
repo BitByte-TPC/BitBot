@@ -56,6 +56,7 @@ exports.getSub = async function (id) {
 
     let l = $('div.ns-content script').html();
     let n = l.substr(21);
+
     const obj = JSON.parse(n.substr(0, n.length - 2));
 
     await instance.exit();
