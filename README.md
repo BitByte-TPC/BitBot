@@ -1,8 +1,7 @@
-# Discord-Bot
----
+## Discord Bot for IIITDM Official Discord Server
 
-# Project Working and in testing
-_ToDo_ :-
+## Project Working and in testing
+### ToDo :-
 - [ ] keep the repo syntactically correct.
 - [X] codechef rating and star to be shown (added with embed)
 - [X] Make a codeforces command (done)
@@ -27,7 +26,7 @@ _ToDo_ :-
 
 ---
 
-# Features till now :-
+## Features till now :-
 - Can ping someone
 - Can produce a help page
 - Can remove/add self roles from member
@@ -40,3 +39,7 @@ _ToDo_ :-
 - Can give roles based on rank and stars in cf and cc respectively
 
 ---
+
+#### Credits :
+- [Meru Patel](http://github.com/janglee123)
+- [Lakshya Baghel](http://github.com/get-thepacket)
