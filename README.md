@@ -20,10 +20,10 @@ _ToDo_ :-
 - [x] add profile link in `!cc user` and `!cf user`
 - [x] modify setrole of both to send which site they are verifying for
 
-- [ ] add `code` command that runs code of selected languges  
-- [ ] add `source` command that gives nice github link embed 
-- [ ] fix `solution` command for both cc and cf
-- [ ] add colouring to code (identify the language of the code)
+- [ ] add `code` command that runs code of selected languges
+- [ ] add `source` command that gives nice github link embed => add thumbnail 
+- [X] fix `solution` command for both cc and cf
+- [X] add colouring to code (identify the language of the code)[done for cc only]
 
 ---
 
