@@ -40,7 +40,7 @@ exports.getUser = async (num) => {
 
 exports.getUserInfo = async (handle) => {
 
-    let url = `https://codeforces.com/api/user.info?handles=${handle}`;
+    let url = `https://codeforces.com/api/user.info?handles=${handle.join(";")}`;
     let option = {
         uri: url,
         headers: {
@@ -55,14 +55,18 @@ exports.getUserInfo = async (handle) => {
 
     if (obj.status != "OK")
         return;
-
-    let user = obj.result[0];
-    user.iconURL = 'https:' + user.avatar 
-    user.color = getColorFromRank[user.rank]
-    return user;
+    
+    // obj.result.forEach(data => {
+    //   user.iconURL = 'https:' + user.avatar 
+    //   user.color = getColorFromRank[user.rank]  
+    // })
+    // let user = obj.result;
+    // user.iconURL = 'https:' + user.avatar 
+    // user.color = getColorFromRank[user.rank]
+    return obj.result;
 };
 
-getColorFromRank = {
+let getColorFromRank = {
     rank: '#color'
 }
 

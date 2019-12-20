@@ -17,8 +17,12 @@ exports.run = (client,message,args) =>{
     rp(options).then(html => {
         const $ = cheerio.load(html);
         let link = $("#comic img").attr('src');
+        let title = $("#comic img").attr('title');
         link = "https:"+link;
-        message.channel.send(link);
+        
+        message.channel.send(title,{
+          files : [link]
+        });
     }).catch(err => console.error);
 }
 
