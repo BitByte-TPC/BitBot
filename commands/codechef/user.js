@@ -9,6 +9,7 @@ exports.run = async (client, message, args) => {
 
     let embed = new Discord.RichEmbed();
     embed.setTitle(`${user.name} - ${user.username}`)
+  .setDescription("https://codechef.com/users/"+user.username)
         .addField("Stars", user.stars, true)
         .addField("Rating", user.rating, true)
         .addField("Highest Rating", user.highRating, true)
@@ -22,4 +23,4 @@ exports.run = async (client, message, args) => {
     message.channel.send(embed);
 }
 
-exports.info = "Print user info of codechef user.\n`!cc user <user-id>`";
+exports.info = "Print user info of codechef user.\n`-cc user <user-id>`";

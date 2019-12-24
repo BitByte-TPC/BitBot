@@ -2,28 +2,28 @@ const cheerio = require('cheerio');
 const rp = require('request-promise');
 const _ = require('lodash');
 
-exports.getSub = async (contest, id) => {
+// exports.getSub = async (link) => {
     
-    if( !contest || !id) return;
+//     // if( !contest || !id) return;
     
+//     let option = {
+//         uri: link,
+//         headers: {
+//             'User-Agent': 'Mozilla/5.0'
+//         }
+//     }
+//     let text;
+//     let html = await rp(option).catch(console.error);
+
+//     const $ = cheerio.load(html);
+//     text = $("pre[id=program-source-text]").text();
+
+//     return text;
+// };
+
+exports.getSub = async (link) => {
     let option = {
-        uri: `http://codeforces.com/contest/${contest}/submission/${id}`,
-        headers: {
-            'User-Agent': 'Mozilla/5.0'
-        }
-    }
-    let text;
-    let html = await rp(option).catch(console.error);
-
-    const $ = cheerio.load(html);
-    text = $("pre[id=program-source-text]").text();
-
-    return text;
-};
-
-exports.getUser = async (num) => {
-    let option = {
-        uri: `https://codeforces.com/contest/${num[0]}/submission/${num[1]}`,
+        uri: link,
         headers: {
             'User-Agent': 'Mozilla/5.0'
         }
@@ -35,6 +35,7 @@ exports.getUser = async (num) => {
     $("td > a").each((i, e) => l.push($(e).attr('href')));
     user.profile = "https://codeforces.com" + l[0];
     user.problem = "https://codeforces.com" + l[1];
+    user.text = $("pre[id=program-source-text]").text();
     return user;
 };
 

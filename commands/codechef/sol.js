@@ -5,9 +5,8 @@ const Discord = require('discord.js');
 exports.run = async function(client,message,args){
     // message.channel.send('Command is not added yet');
 
-    //in testing
     //gives out the info of the solution - it's link, profile link and contest link
-    const p = await web.getSub(args);
+    const p = await web.getSub(args[0]);
     const profile = p.data;
     if(profile.testInfo == ''){
         message.channel.send("Solution not found!");
@@ -36,4 +35,4 @@ exports.run = async function(client,message,args){
     
 }
 
-exports.info = "Print solution as a text message and it's info\n!codechef solution 'solution-id'";
+exports.info = "Print solution as a text message and it's info\n`-cc sol <solution-link>`";

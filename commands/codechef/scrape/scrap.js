@@ -12,7 +12,7 @@ const colors = {
     7: "#C7011A"
 }
 
-exports.getUserInfo = async (username, callback) => {
+exports.getUserInfo = async (username) => {
     
     let options = {
         uri: `https://www.codechef.com/users/${username}`,
@@ -37,14 +37,14 @@ exports.getUserInfo = async (username, callback) => {
     return user;
 };
 
-exports.getSub = async function (id) {
+exports.getSub = async function (link) {
     const instance = await phantom.create();
     const page = await instance.createPage();
 
     await page.on("onRequestingResource", data => {
         console.info('Requesting', data.url);
     });
-    const status = await page.open(`https://www.codechef.com/viewsolution/${id}`)
+    const status = await page.open(link);
     console.log(status);
 
     const content = await page.property('content');

@@ -2,8 +2,8 @@ const web = require('./api/calls.js');
 const Discord = require('discord.js');
 
 exports.run = async (client,message,args) => {
-    
-    let user = await web.getUser(args);
+    // console.log(args);
+    let user = await web.getSub(args[0]);
     if(!user){
         message.channel.send("User doesn't exists");
         return;
@@ -13,7 +13,7 @@ exports.run = async (client,message,args) => {
         .addField("Problem link:",user.problem);
     message.channel.send(embed);
 
-    let text = await web.getSub(args[0],args[1]);
+    let text = user.text;
         if(!text){
             message.channel.send("Solution not found please enter again.");
             return;
@@ -26,4 +26,4 @@ exports.run = async (client,message,args) => {
         });    
 };
 
-exports.info = "Fetches solution if contest code and solution code is given.\n!codechef solution contest-code solution-id";
+exports.info = "Fetches solution if contest code and solution code is given.\n`-cf sol <solution-link>`";

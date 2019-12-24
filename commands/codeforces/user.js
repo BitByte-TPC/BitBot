@@ -10,8 +10,8 @@ exports.run = async (client, message, args) => {
       "1900-2099" : "#AA00AA",
       "1600-1899" : "#0000FF",
       "1400-1599" : "#03A89E",
-      "1200-1399" : "#88CC22",
-      "0-1199" : "#646464"
+      "1200-1399" : "#00CC00",
+      "0-1199" : "#444444"
     }  
     
     let colour = (value) => {
@@ -42,4 +42,4 @@ exports.run = async (client, message, args) => {
 
 };
 
-exports.info = "Gives details about user.\n!codeforces user [user-names]\nMultiple user supported.";
+exports.info = "Gives details about user.\n`-cf user [user-names]`\nMultiple user supported.";
