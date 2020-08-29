@@ -1,4 +1,4 @@
-## Discord Bot for IIITDM Official Discord Server
+## Discord Bot for BitByte - The Programming club Server
 
 ## Project Working and in testing
 ### ToDo :-
