@@ -1,7 +1,7 @@
 exports.run = async (bot, msg, year) => {
 
     if (isNaN(year)) {
-        msg.channel.send("Invalid argument, Enter command as `!batch 2017`");
+        msg.channel.send("Invalid argument, Enter command as `-batch 2017`");
         return;
     }
     if (!msg.guild) {
@@ -10,7 +10,7 @@ exports.run = async (bot, msg, year) => {
 
     let roles = msg.member.roles;
     if (roles.find(r => r.name.match(/Batch [0-9]{4}/))) {
-        msg.channel.send("You can't get multiple Batch roles");
+        msg.channel.send("You can't get multiple Batch roles.");
         return;
     }
 
@@ -25,6 +25,7 @@ exports.run = async (bot, msg, year) => {
     }
 
     msg.member.addRole(role).catch(console.error);
+    msg.channel.send(`\`${batchRole}\` role added for user ${msg.member.user}`);
     
 }
 
