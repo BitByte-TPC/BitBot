@@ -16,4 +16,27 @@ interface IBitBot {
     loadCommand(dir: string, file: string): void;
 }
 
-export { ICommand, IBitBot };
+interface ICCUserInfo {
+    username: string;
+    name: string;
+    stars: number;
+    rating: number;
+    maxRating: number;
+    iconURL: string;
+    colorCode: string;
+    link: string;
+}
+
+interface ICFUserInfo {
+    handle: string;
+    name: string;
+    rank: string;
+    maxRank: string;
+    rating: number;
+    maxRating: number;
+    iconURL: string;
+    colorCode: string;
+    link: string;
+}
+
+export { ICommand, IBitBot, ICCUserInfo, ICFUserInfo };
