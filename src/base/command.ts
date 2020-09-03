@@ -1,5 +1,5 @@
 import { ICommand } from './types';
-import { Message } from 'discord.js';
+import { Message, Guild, Role, GuildMember } from 'discord.js';
 import { BitBot } from './bitBot';
 
 export class Command implements ICommand {
@@ -20,7 +20,27 @@ export class Command implements ICommand {
     public async run(msg: Message, args: string[]): Promise<void> { }
     public init(): void { }
 
-    protected _sendUsges(msg: Message): void {
+    protected _sendUsages(msg: Message): void {
         msg.reply(this.usage);
+    }
+
+    protected async _createRole(guild: Guild, name: string, color: string): Promise<Role> {
+        return await guild.roles.create({
+            data: {
+                name: name,
+                color: color
+            }
+        });
+    }
+
+    protected async _removeRole(member: GuildMember, roleName: string | RegExp): Promise<void> {
+        const role = this._hasRole(member, roleName);
+        if (role) {
+            member.roles.remove(role);
+        }
+    }
+
+    protected _hasRole(base: GuildMember | Guild, roleName: string | RegExp): Role | undefined {
+        return base.roles.cache.find(r => r.name.search(roleName) > 0);
     }
 }

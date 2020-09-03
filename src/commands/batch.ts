@@ -12,33 +12,30 @@ export = class extends Command {
     }
 
     public async run(msg: Message, args: string[]): Promise<void> {
-        if (args.length !== 1 || isNaN(parseInt(args[0]))) {
-            this._sendUsges(msg);
+
+        if (!msg.member || !msg.guild) {
             return;
         }
 
-        const roles = msg.member?.roles.cache;
-        const batchRoleReg = new RegExp(/Batch [0-9]{4}/);
-        if (roles?.find(r => batchRoleReg.test(r.name))) {
+        if (args.length !== 1 || isNaN(parseInt(args[0]))) {
+            this._sendUsages(msg);
+            return;
+        }
+
+        if (this._hasRole(msg.member, /Batch [0-9]{4}/)) {
             msg.channel.send(`You can't get multiple Batch roles.`);
             return;
         }
 
         const year = args[0];
-        const batchRole = 'Batch ' + year;
-        let role = roles?.find(r => r.name === batchRole);
 
-        if (!role) {
-            await msg.guild?.roles.create({
-                data: {
-                    name: batchRole,
-                    color: 'GREEN'
-                }
-            }).catch(console.error);
-            role = roles?.find(r => r.name === batchRole);
+        let batchRole = this._hasRole(msg.guild, `Batch ${year}`);
+
+        if (!batchRole) {
+            batchRole = await this._createRole(msg.guild, `Batch ${year}`, 'GREEN');
         }
 
-        msg.member?.roles.add(batchRole);
+        msg.member.roles.add(batchRole);
         msg.react('✅');
     }
 

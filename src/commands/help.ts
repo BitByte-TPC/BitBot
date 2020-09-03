@@ -32,7 +32,7 @@ export = class extends Command {
                 msg.channel.send(embed);
                 break;
             default:
-                this._sendUsges(msg);
+                this._sendUsages(msg);
         }
     }
 };

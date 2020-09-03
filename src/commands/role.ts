@@ -13,25 +13,33 @@ export = class extends Command {
     }
 
     public async run(msg: Message, args: string[]): Promise<void> {
-        if (args.length !== 1) {
-            this._sendUsges(msg);
+
+        if (!msg.guild || !msg.member) {
             return;
         }
-        if (!allowedSelfRoles.includes(args[0])) {
+
+        if (args.length !== 1) {
+            this._sendUsages(msg);
+            return;
+        }
+
+        const roleName = args[0].toLowerCase();
+        const reg = new RegExp(roleName, 'i');
+
+        if (allowedSelfRoles.findIndex(s => reg.test(s)) < 0) {
             msg.reply('Select one of these: ' + allowedSelfRoles.toString() + '.');
             return;
         }
 
-        const role = msg.guild?.roles.cache.find(r => r.name.toLowerCase() === args.join(' ').toLowerCase());
-
+        const role = this._hasRole(msg.guild, reg);
         if (!role) {
-            throw `Can not find role ${args[0]}`;
+            throw `Could not not find role ${roleName}`;
         }
 
-        if (msg.member?.roles.cache.has(role.id)) {
+        if (msg.member.roles.cache.has(role.id)) {
             msg.member.roles.remove(role);
         } else {
-            msg.member?.roles.add(role);
+            msg.member.roles.add(role);
         }
     }
 };
