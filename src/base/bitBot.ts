@@ -1,8 +1,8 @@
 import path from 'path';
-import { Client, Collection, Message } from 'discord.js';
+import { Client, Collection, Message, PartialGuildMember, GuildMember, MessageEmbed } from 'discord.js';
 import { Command } from './command';
 import { IBitBot } from './types';
-
+import responses from '../static/responses';
 export class BitBot extends Client implements IBitBot {
     private _commands: Collection<string, Command>;
     private _aliases: Collection<string, String>;
@@ -35,6 +35,15 @@ export class BitBot extends Client implements IBitBot {
                 command.run(msg, args);
             } catch (e) {
                 console.error(e);
+            }
+        });
+
+        this.on('guildMemberAdd', (member: GuildMember | PartialGuildMember) => {
+            const welcomeChannel = member.guild.systemChannel;
+            if (welcomeChannel && member.user) {
+                const random = Math.floor(Math.random()*responses.onJoin.length);
+                const msg = responses.onJoin[random].replace('%name%', member.user.toString());
+                welcomeChannel.send(msg);
             }
         });
 
