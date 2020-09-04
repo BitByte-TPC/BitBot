@@ -1,6 +1,7 @@
 import { Command } from '../base/command';
-import { Client, Message } from 'discord.js';
+import { Message, GuildMember } from 'discord.js';
 import { BitBot } from '../base/bitBot';
+import { IMemberProfile } from '../base/types';
 
 
 export = class extends Command {
@@ -17,7 +18,7 @@ export = class extends Command {
             return;
         }
 
-        if (args.length !== 1 || isNaN(parseInt(args[0]))) {
+        if (args.length !== 1 || args[0].length !== 4 || /20[0-9]{2}/.test(args[0])) {
             this._sendUsages(msg);
             return;
         }
@@ -30,13 +31,29 @@ export = class extends Command {
         const year = args[0];
 
         let batchRole = this._hasRole(msg.guild, `Batch ${year}`);
-
         if (!batchRole) {
+            msg.reply('The batch role is not available yet');
             batchRole = await this._createRole(msg.guild, `Batch ${year}`, 'GREEN');
         }
 
         msg.member.roles.add(batchRole);
         msg.react('✅');
+
+        this._registerMember(msg.member);
     }
 
+    private async _registerMember(member: GuildMember): Promise<void> {
+        const profile: IMemberProfile = {
+            id: member.user.id,
+            guildId: member.guild.id,
+            ccUsername: '',
+            cfHandle: '',
+            score: 0
+        };
+
+        const isAlreadyRegistered = await this._client.getMemberInfo(member) !== undefined;
+        if (!isAlreadyRegistered) {
+            this._client.setMemberInfo(member, profile);
+        }
+    }
 };

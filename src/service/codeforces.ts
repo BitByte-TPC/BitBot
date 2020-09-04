@@ -28,8 +28,8 @@ class Codeforces {
         const user: ICFUserInfo = {
             name: `${result.firstName} ${result.lastName}`,
             handle: handle,
-            rank: result.rank,
-            maxRank: result.maxRank,
+            rank: result.rank.replace(/\b\w/g, (c: string) => c.toUpperCase()),
+            maxRank: result.maxRank.replace(/\b\w/g, (c: string) => c.toUpperCase()),
             rating: result.rating,
             maxRating: result.maxRating,
             iconURL: `https:${result.avatar}`,

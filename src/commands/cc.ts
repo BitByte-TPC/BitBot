@@ -11,12 +11,23 @@ export = class extends Command {
         this.usage = '`!cc <command> ...`';
     }
 
+    public init(): void {
+        const FIVE_DAYS = 5 * 24 * 60 * 60 * 1000;
+        setInterval(async () => {
+            const members = await this._client.getAllMembers();
+            members.forEach((profile, mem) => {
+                this._updateRole(mem, profile.cfHandle);
+            });
+        }, FIVE_DAYS);
+    }
+
     public async run(msg: Message, args: string[]): Promise<void> {
         const command = args.shift();
 
         switch (command) {
-            // case 'connect':
-            //     this._connect(msg, args);
+            case 'connect':
+                this._connect(msg, args);
+                break;
             case 'sub':
                 this._sub(msg, args);
                 break;
@@ -25,6 +36,9 @@ export = class extends Command {
                 break;
             case 'prob':
                 this._problem(msg, args);
+                break;
+            case 'update':
+                this._update(msg);
                 break;
             default:
                 this._help(msg);
@@ -39,22 +53,40 @@ export = class extends Command {
 
         const username = args[0];
         const [probCode, probLink] = await Codechef.fetchRandomProblem();
-        msg.reply(`You have 5 min!, submit a code to the below question. It doesn't have to be correct just submit.\n${probLink}`);
+        msg.reply(`You have 1 minutes! Submit a code to the below question. It doesn't have to be correct just submit.\n${probLink}`);
 
         setTimeout(async () => {
-            const submissionTime = await Codechef.getLatestSubmissionDate(username, probCode);
-            const timeDiff = new Date().getTime() - submissionTime.getTime();
+            try {
+                const submissionTime = await Codechef.getLatestSubmissionDate(username, probCode);
+                const timeDiff = new Date().getTime() - submissionTime.getTime();
 
-            if (timeDiff <= 6 * 60 * 1000) {
-                msg.reply(`You are now verified for Codechef user: ${username}!\nYour role will be added soon.`);
 
-                if (msg.member) {
-                    this._setRole(msg.member, username);
+                if (timeDiff <= 6 * 60 * 1000) {
+                    msg.reply(`You are now verified for Codechef user: ${username}!\nYour role will be added soon.`);
+
+                    if (msg.member) {
+                        this._setMemberHandle(msg.member, username);
+                        this._updateRole(msg.member, username);
+                    }
+                } else {
+                    msg.reply('Failed to verify your codechef account. You can try again.');
                 }
-            } else {
-                msg.reply('Failed to verify your codechef account. You can try again.');
+            } catch (e) {
+                msg.reply('Something went wrong please try again. :)');
             }
-        }, 5 * 60 * 1000);
+        }, 60 * 1000);
+    }
+
+    private async _update(msg: Message): Promise<void> {
+        if (msg.member) {
+            const profile = await this._client.getMemberInfo(msg.member);
+            if (profile) {
+                this._updateRole(msg.member, profile.cfHandle);
+                msg.react('✅');
+            } else {
+                msg.reply('You are not registered yet, register yourself with `!batch <year>`');
+            }
+        }
     }
 
     private async _problem(msg: Message, args: string[]): Promise<void> {
@@ -116,7 +148,7 @@ export = class extends Command {
 
     private _help(msg: Message): void {
         const embed = new MessageEmbed()
-            // .addField('`!cc connect <username>`', 'Gives you codechef star role.')
+            .addField('`!cc connect <username>`', 'Gives you codechef star role.')
             .addField('`!cc prob [school|easy|medium|hard|challenge]`', 'Fetches random problem based on given difficulty.')
             .addField('`!cc sub <submission_id>`', 'Fetches source code of submission.')
             .addField('`!cc user <username>`', 'Prints user information.')
@@ -124,20 +156,32 @@ export = class extends Command {
         msg.channel.send(embed);
     }
 
-    private async _setRole(member: GuildMember, id: string): Promise<void> {
-        const user = await Codechef.getUserInfo(id);
-        const newRole = 'Codechef ' + user.stars + '★';
+    private async _setMemberHandle(member: GuildMember, username: string): Promise<void> {
+        const profile = await this._client.getMemberInfo(member);
+        if (profile) {
+            profile.ccUsername = username;
+            this._client.setMemberInfo(member, profile);
+        }
+    }
 
-        const roles = member.roles;
-        const oldRole = roles.cache.find(r => r.name.startsWith('Codechef'));
+    private async _updateRole(member: GuildMember, username: string): Promise<void> {
+        const cfProfile = await Codechef.getUserInfo(username);
+        const roleName = `Codechef ${cfProfile.stars}★`;
+        if (this._hasRole(member, roleName)) {
+            return;
+        }
 
+        const reg = new RegExp(/Codechef/);
+        const oldRole = this._hasRole(member, reg);
         if (oldRole) {
             member.roles.remove(oldRole);
         }
 
-        const role = member.guild.roles.cache.find(r => r.name === newRole);
-        if (role) {
-            member.roles.add(role);
+        let role = this._hasRole(member.guild, roleName);
+        if (!role) {
+            role = await this._createRole(member.guild, roleName, cfProfile.colorCode);
         }
+
+        member.roles.add(role);
     }
 };

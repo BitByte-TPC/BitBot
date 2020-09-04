@@ -25,7 +25,7 @@ export class Command implements ICommand {
     }
 
     protected async _createRole(guild: Guild, name: string, color: string): Promise<Role> {
-        return await guild.roles.create({
+        return guild.roles.create({
             data: {
                 name: name,
                 color: color
@@ -41,6 +41,6 @@ export class Command implements ICommand {
     }
 
     protected _hasRole(base: GuildMember | Guild, roleName: string | RegExp): Role | undefined {
-        return base.roles.cache.find(r => r.name.search(roleName) > 0);
+        return base.roles.cache.find(r => r.name.search(roleName) >= 0);
     }
 }

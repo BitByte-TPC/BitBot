@@ -97,7 +97,7 @@ class Codechef {
             time.setHours(hours, mins);
             time.setFullYear(year + 2000, month - 1, date);
         } else {
-            throw 'Can not parse the date';
+            throw `Can not parse the date ${dateString}`;
         }
 
         return time;

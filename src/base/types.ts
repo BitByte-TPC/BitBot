@@ -39,4 +39,12 @@ interface ICFUserInfo {
     link: string;
 }
 
-export { ICommand, IBitBot, ICCUserInfo, ICFUserInfo };
+interface IMemberProfile {
+    id: string;
+    guildId: string;
+    cfHandle: string;
+    ccUsername: string;
+    score: number;
+}
+
+export { ICommand, IBitBot, ICCUserInfo, ICFUserInfo, IMemberProfile };
