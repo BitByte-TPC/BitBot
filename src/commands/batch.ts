@@ -24,16 +24,16 @@ export = class extends Command {
         }
 
         if (this._hasRole(msg.member, /Batch [0-9]{4}/)) {
-            msg.channel.send(`You can't get multiple Batch roles.`);
+            msg.channel.send(`You already have a batch role. You can't get multiple Batch roles.`);
             return;
         }
 
         const year = args[0];
 
-        let batchRole = this._hasRole(msg.guild, `Batch ${year}`);
+        const batchRole = this._hasRole(msg.guild, `Batch ${year}`);
         if (!batchRole) {
             msg.reply('The batch role is not available yet');
-            batchRole = await this._createRole(msg.guild, `Batch ${year}`, 'GREEN');
+            return;
         }
 
         msg.member.roles.add(batchRole);

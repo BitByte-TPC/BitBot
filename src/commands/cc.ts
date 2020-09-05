@@ -56,23 +56,24 @@ export = class extends Command {
         msg.reply(`You have 1 minutes! Submit a code to the below question. It doesn't have to be correct just submit.\n${probLink}`);
 
         setTimeout(async () => {
-            try {
-                const submissionTime = await Codechef.getLatestSubmissionDate(username, probCode);
-                const timeDiff = new Date().getTime() - submissionTime.getTime();
+            const submissionTime = await Codechef.getLatestSubmissionDate(username, probCode).catch(console.log);
+            if (!submissionTime) {
+                msg.reply('Failed to verify your codechef account. You can try again.');
+                return;
+            }
 
+            const timeDiff = new Date().getTime() - submissionTime.getTime();
 
-                if (timeDiff <= 6 * 60 * 1000) {
-                    msg.reply(`You are now verified for Codechef user: ${username}!\nYour role will be added soon.`);
+            if (timeDiff > 6 * 60 * 1000) {
+                msg.reply('Failed to verify your codechef account. You can try again.');
+                return;
+            }
 
-                    if (msg.member) {
-                        this._setMemberHandle(msg.member, username);
-                        this._updateRole(msg.member, username);
-                    }
-                } else {
-                    msg.reply('Failed to verify your codechef account. You can try again.');
-                }
-            } catch (e) {
-                msg.reply('Something went wrong please try again. :)');
+            msg.reply(`You are now verified for Codechef user: ${username}!\nYour role will be added soon.`);
+
+            if (msg.member) {
+                this._setMemberHandle(msg.member, username);
+                this._updateRole(msg.member, username);
             }
         }, 60 * 1000);
     }

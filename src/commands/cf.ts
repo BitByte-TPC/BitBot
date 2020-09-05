@@ -54,20 +54,23 @@ export = class extends Command {
         msg.reply(`You have 1 minutes! Submit a code to the below question. It doesn't have to be correct just submit.\n${probLink}`);
 
         setTimeout(async () => {
-            try {
-                const submissionTime = await Codeforces.getLatestSubmissionDate(handle, contestId, index);
-                const timeDiff = new Date().getTime() - submissionTime.getTime();
-                if (timeDiff <= 6 * 60 * 1000) {
-                    msg.reply(`You are now verified for Codeforces user: ${handle}!\nYour role will be added soon.`);
+            const submissionTime = await Codeforces.getLatestSubmissionDate(handle, contestId, index).catch(console.log);
+            if (!submissionTime) {
+                msg.reply('Failed to verify your Codeforces account. You can try again.');
+                return;
+            }
 
-                    if (msg.member) {
-                        this._setMemberHandle(msg.member, handle);
-                        this._updateRole(msg.member, handle);
-                    }
-                } else {
-                    msg.reply('Failed to verify your Codeforces account. You can try again.');
-                }
-            } catch (e) {
+            const timeDiff = new Date().getTime() - submissionTime.getTime();
+
+            if (timeDiff > 6 * 60 * 1000) {
+                msg.reply('Failed to verify your Codeforces account. You can try again.');
+                return;
+            }
+            msg.reply(`You are now verified for Codeforces user: ${handle}!\nYour role will be added soon.`);
+
+            if (msg.member) {
+                this._setMemberHandle(msg.member, handle);
+                this._updateRole(msg.member, handle);
             }
         }, 60 * 1000);
     }
