@@ -134,7 +134,8 @@ export = class extends Command {
             .addField('`!cf prob <tag>`', 'Fetches random problem from tag.')
             .addField('`!cf user <handle>`', 'Prints user information.')
             .addField('`!cf update`', `Manually update your Codeforces role.`)
-            .setTitle('Help!');
+            .setTitle('Help!')
+            .setDescription(this.description);
         msg.channel.send(embed);
     }
 

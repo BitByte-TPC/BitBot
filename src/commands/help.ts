@@ -12,7 +12,9 @@ export = class extends Command {
 
     public async run(msg: Message, args: string[]): Promise<void> {
         const commands = this._client.getCommands();
-        const embed = new MessageEmbed();
+        const embed = new MessageEmbed()
+            .setTitle('Help!')
+            .setDescription('Use theme with prefix `!` because sudo is not an option.');
 
         switch (args.length) {
             case 1:

@@ -152,7 +152,8 @@ export = class extends Command {
             .addField('`!cc prob [school|easy|medium|hard|challenge]`', 'Fetches random problem based on given difficulty.')
             .addField('`!cc sub <submission_id>`', 'Fetches source code of submission.')
             .addField('`!cc user <username>`', 'Prints user information.')
-            .setTitle('Help!');
+            .setTitle('Help!')
+            .setDescription(this.description);
         msg.channel.send(embed);
     }
 
