@@ -2,6 +2,11 @@ const allowedSelfRoles = ['Competitive Programmer','Developer','Gamer', 'Linux',
 
 exports.run = (client,message,args) => {
     let member = message.member;
+
+    if (!args) {
+        message.channel.send("Available roles are `'Competitive Programmer','Developer','Gamer', 'Linux', 'Windows'`");
+        return;
+    }
     
     let role = message.guild.roles.find(r => r.name.toLowerCase() === args.join(" ").toLowerCase());
     

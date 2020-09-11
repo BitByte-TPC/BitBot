@@ -1,5 +1,10 @@
 exports.run = async (bot, msg, year) => {
 
+    if (!year) {
+        msg.channel.send("Enter command as `-batch <year>` to get your batch role.");
+        return;
+    }
+
     if (isNaN(year)) {
         msg.channel.send("Invalid argument, Enter command as `-batch 2017`");
         return;
