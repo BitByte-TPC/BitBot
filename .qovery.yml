@@ -1,0 +1,15 @@
+application:
+  name: BitBot
+  project: BitBot
+  cloud_region: aws/us-east-2
+  publicly_accessible: true
+databases:
+- type: mongodb
+  version: "3.6"
+  name: my-mongodb-8628210
+routers:
+- name: main
+  routes:
+  - application_name: BitBot
+    paths:
+    - /
