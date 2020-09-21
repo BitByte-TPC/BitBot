@@ -17,7 +17,7 @@ export class BitBot extends Client implements IBitBot {
         this._commands = new Collection();
         this._aliases = new Collection();
         this._addListeners();
-        this._memberDB = new Keyv<IMemberProfile>(process.env.POSTGRESQL_URL, { namespace: 'member' });
+        this._memberDB = new Keyv<IMemberProfile>(process.env.QOVERY_DATABASE_THE_DB_CONNECTION_URI, { namespace: 'member' });
     }
 
     private _addListeners(): void {
