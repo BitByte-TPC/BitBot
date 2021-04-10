@@ -18,6 +18,11 @@ export = class extends Command {
             return;
         }
 
+        if (args.length === 2) {
+            args[0] = args.join(' ');
+            args.pop();
+        }
+
         if (args.length !== 1) {
             this._sendUsages(msg);
             return;
