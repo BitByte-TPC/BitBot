@@ -40,6 +40,7 @@ export = class extends Command {
             msg.member.roles.remove(role);
         } else {
             msg.member.roles.add(role);
+            msg.react('✅');
         }
     }
 };
