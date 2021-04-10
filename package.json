@@ -4,8 +4,7 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn run tsc",
-    "start": "yarn build && node ./bin/www",
+    "start": "node build/app.js",
     "lint": "eslint -c .eslintrc.json --max-warnings 0 --ext .ts src/"
   },
   "devDependencies": {
