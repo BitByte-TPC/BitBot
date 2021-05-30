@@ -18,6 +18,11 @@ export = class extends Command {
             return;
         }
 
+        if (args.length === 2) {
+            args[0] = args.join(' ');
+            args.pop();
+        }
+
         if (args.length !== 1) {
             this._sendUsages(msg);
             return;
@@ -38,8 +43,10 @@ export = class extends Command {
 
         if (msg.member.roles.cache.has(role.id)) {
             msg.member.roles.remove(role);
+            msg.reply(`${args[0]} role retracted!`);
         } else {
             msg.member.roles.add(role);
+            msg.react('✅');
         }
     }
 };
